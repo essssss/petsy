@@ -1,0 +1,48 @@
+{% extends 'base.html' %} {% block title %} {% endblock %} {% block content %}
+<div class="container">
+    <div class="row text-center">
+        <div class="col">
+            <h1 class="display-1">PETS</h1>
+        </div>
+    </div>
+    <div class="row my-4 text-center">
+        <div class="col">
+            <a href="/add" class="btn btn-large btn-primary">Add New Pet</a>
+        </div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3">
+        {% for pet in pets %}
+        <div class="col">
+            <div class="card border-primary m-1 text-center">
+                {% if pet.photo_url %}<img
+                    src="{{ pet.photo_url }}"
+                    class="card-img-top"
+                />
+                {% else %}<img
+                    src="https://images.squarespace-cdn.com/content/5259cce9e4b0b7382f189a32/49c0fba5-3ad8-44e1-8d92-4c7f39c15e26/petsy-9.png?content-type=image%2Fpng"
+                    class="card-img-top"
+                />
+                {% endif %}
+                <div class="card-body border-primary">
+                    <p class="display-6">{{ pet.name }}</p>
+                    <a
+                        href="/{{ pet.id }}"
+                        class="btn btn-primary btn-small my-1"
+                    >
+                        More Info
+                    </a>
+                    {% if pet.available==True %}
+                    <a
+                        href="/{{ pet.id }}/adopt"
+                        class="btn btn-success btn-small my-1"
+                    >
+                        Adoption available
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
